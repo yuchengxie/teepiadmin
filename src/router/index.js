@@ -20,6 +20,26 @@ export default new Router({
           meta: { title: '系统首页' }
         },
         {
+          path: '/account',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/account/Account.vue'),
+          meta: { title: '账户管理' }
+        },
+        {
+          path: '/export',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/account/TEEExport.vue'),
+          meta: { title: '导出' }
+        },
+        {
+          path: '/import',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/account/TEEImport.vue'),
+          meta: { title: '导入' }
+        },
+        {
+          path: '/modifyPwd',
+          component: () => import(/* webpackChunkName: "icon" */ '../components/page/account/ModifyPwd.vue'),
+          meta: { title: '修改密码' }
+        },
+        {
           path: '/icon',
           component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
           meta: { title: '自定义图标' }
@@ -100,7 +120,22 @@ export default new Router({
         {
           path: '/donate',
           component: () => import(/* webpackChunkName: "donate" */ '../components/page/Donate.vue'),
-          meta: { title: '支持作者' }
+          meta: { title: '支持反馈' }
+        },
+        {
+          path: '/test1',
+          component: () => import(/* webpackChunkName: "donate" */ '../components/page/demo/Test1.vue'),
+          meta: { title: '测试' }
+        },
+        {
+          path: '/test2',
+          component: () => import(/* webpackChunkName: "donate" */ '../components/page/demo/Test2.vue'),
+          meta: { title: '测试' }
+        },
+        {
+          path: '/test3',
+          component: () => import(/* webpackChunkName: "donate" */ '../components/page/demo/Test3.vue'),
+          meta: { title: '辅助' }
         }
       ]
     },

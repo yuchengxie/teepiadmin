@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
+import store from './store'
 import { messages } from './components/common/i18n';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
@@ -13,17 +14,27 @@ import 'babel-polyfill';
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
-  size: 'small'
+  // size: 'small'
 });
 const i18n = new VueI18n({
   locale: 'zh',
   messages
 });
 
+store.$events = {};
+store.$emit = function (evt, data) {
+  if (!this.$events['$' + evt]) return;
+  this.$events['$' + evt](data)
+}
+
+store.$on = function (evt, fn) {
+  store.$events['$' + evt] = fn;
+}
+
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
   // document.title = `${to.meta.title} | vue-manage-system`;
-  document.title = `${to.meta.title} | TEE-manage-system`;
+  document.title = `${to.meta.title} | TEE管理`;
   const role = localStorage.getItem('ms_username');
   if (!role && to.path !== '/login') {
     next('/login');
@@ -44,6 +55,7 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   router,
+  store,
   i18n,
   render: h => h(App)
 }).$mount('#app');
